@@ -1,0 +1,74 @@
+
+ STOCKS
+ ---
+ (ticker
+ ,name
+ ,sector
+ ,industry
+ ,mkt_cap
+ ,exchange
+ ,eps_f0
+ ,eps_f1
+ ,eps_f2
+ ,pe_ttm
+ ,pe_f1
+ ,pe_f2
+ ,peg_ratio
+ ,div_yield
+ ,net_margin
+ ,change_f1_est_4_weeks
+ ,change_f2_est_4_weeks
+ ,change_ltg_est_4_weeks
+ ,last_eps_surprise
+ ,prev_eps_surprise
+ ,avg_eps_surprise_last_4_q
+ ,next_earnings_call
+ ,year_end
+ ,debt_total_capital
+ ,growth1
+ ,growth2
+ )
+
+
+INSERT INTO stocks
+SELECT
+ ''
+,''
+,''
+,ticker
+,company_name
+,Sector
+,Industry
+,Market_Cap
+,Exchange
+,F0_Consensus_Est
+,F1_Consensus_Est
+,F2_Consensus_Est
+,P_E_Trailing_12_Months
+,P_E_F1
+,P_E_F2
+,PEG_Ratio
+,Div_Yield
+,Net_Margin
+,Change_F1_Est_4_weeks
+,Change_F2_Est_4_weeks
+,Change_LT_Growth_Est_4_weeks
+,Last_EPS_Surprise
+,Previous_EPS_Surprise
+,Avg_EPS_Surprise_last_4_Qtrs
+,Next_EPS_Report_Date
+,Month_of_Fiscal_Yr_End
+,Debt_Total_Capital
+,(F1_Consensus_Est-F0_Consensus_Est)/F0_Consensus_Est
+,(F2_Consensus_Est-F1_Consensus_Est)/F1_Consensus_Est
+FROM  stock
+WHERE ticker in ('AAPL', 'M', 'GOOS', 'CHS');
+
+
+ALTER TABLE stocks ADD COLUMN
+(
+    growth1 float(6,2) NULL,
+    growth2 float(6,2) NULL
+);
+
+update stocks set growth1 = (EPS2-EPS1)/EPS2;

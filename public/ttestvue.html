@@ -1,0 +1,81 @@
+<html><body>
+<div id="app">
+
+    <select v-model="panel">
+        <option value="Darvas">Darvas</option>
+        <option value="Positions">Positions</option>
+        <option value="TICN">TICN</option>
+    </select>
+
+    <div v-show="(panel=='TICN')">
+        <li>XLNX
+        <li>GOOS
+    </div>
+    <div v-show="(panel=='Darvas')">
+        <li>MMC
+        <li>AAPL
+        <li>GME
+        <li>SDRL
+    </div>
+    <div v-show="(panel=='Positions')">
+        <li>TTWO
+        <li>PONY
+        <li>AAPL
+        <li>NME
+    </div>
+
+
+    <input tyep="text" v-model="message" /> MVVM framework <-->
+
+    <h3> {{message}}</h3>
+    <h3 v-text="message"> </h3>
+    <h3 v-html="intro"></h3>
+    <h3 v-show="showz">You have view this page</h3>
+
+    <h3 v-if="logical==true">Does or does not render in the DOM</h3>
+
+
+    <h3 v-if="viewed">Does or does not render in the DOM</h3>
+    <h3 v-else>alternative to if , but if must be above</h3>
+    <h3 v-pre>{{Don't escape mustache}}</h3>
+   <pre>
+    v-once only render one time
+    v-cloak render last after all other substitutions
+</pre>
+
+    <h1 :title="tooltip">{{message}}</h1>
+
+
+    v-for
+
+    <ul>
+        <li v-for="todo in todos">{{todo.id}}) {{todo.text}}</li>
+    </ul>
+
+
+</div>
+</body>
+<script src="https://unpkg.com/vue@2.0.3/dist/vue.js"></script>
+
+<script>
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'WOWOOWOWOW',
+            intro: 'Welcome <h1>introduction</h1>',
+            showz: false,
+
+            panel: 'TICN',
+
+            logical: true,
+            tooltip: 'boo ya!',
+            todos: [
+                {text:'learn vue', id: 1},
+                {text:'write processes', id: 2},
+                {text:'meditate', id: 3}
+                ]
+        }
+    })
+</script>
+</html>

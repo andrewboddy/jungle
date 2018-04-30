@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" type="text/css" href="Stylesheet1.css" >
+    <style>
+    	
+    	td[data-number^="-"] {
+			color:#cd5c5c;
+		}
+
+		td data {
+			color:#5c5ccd;
+		}
+
+		.dot {
+			background: #55eda3;
+		}
+
+		* { font-family: "Arial Black", sans-serif; }	
+
+		div * {}
+
+		.class {
+			padding: 20px solid #00308F;
+		}
+		
+		#id {
+			font-variant: small-caps;
+		}
+
+
+		#space {
+			background-color: #c2FFc4; /* url ("repeat.png") no-repeat; */
+			height: 100px;
+			width: 100px;
+			border: 2px dotted #000;
+			padding: 20px;
+			margin: 20px;
+		}
+
+ 		span#tonyrobbins {
+			color: blue;
+		}
+
+		ul {
+			top: -100;
+		}
+
+		ul li {
+			list-style-type: none;
+			margin-left: 100;
+		}
+
+#top-left-pos {
+	background-color: red;
+	border: 1px solid black;
+	position: absolute;
+	height: 200px
+	width: 200px;
+	z-index: 4;
+
+}
+
+#bottom-right-tl-parent {
+	background-color: pink;
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+}
+
+
+
+	</style> 
+
+</head>
+<body>
+
+
+
+<div style="background:#f7f78a; font-family:courier; width:50%; margin:1em; padding:3em;">
+
+php artisan make:migration create_users_table --create=users<br/>
+
+php artisan make:migration add_alert_to_watch_items --table=watch_items<br/>
+
+
+</div>
+
+<div style="background:#020202; color: red; font-family:courier; width:50%; margin:1em; padding:3em;">
+	{{ Auth::check() ? 'yes' : 'no' }}
+</div>
+
+<pre style="background:#f7f78a; color:blue; font-family:courier; width:40%; margin:3em; border: dotted 2px silver;padding:3em;">
+composer create-project laravel/laravel your-project-name 4.2.*
+composer create-project laravel/laravel gdrp2
+...
+cd gdpr2
+php artisan serve --port 8001
+// Ctrl-C to stop
+php artisan view:clear // when views not refreshing
+
+php artisan make:controller PhotosController --resource
+php artisan make:model Photo --migration
+(see 5:27 for error fix)
+php artisan migrate
+
+Controller needs 
+   index
+   show (id)
+   create  = POST form
+   store (request)
+   edit (id)  = POST form 
+   update (request, id)
+   delete
+   destroy (id)
+Route::resource(posts,PostController);
+php artisan route:list
+</pre>
+
+<pre style="background:#444444; color:#00ff00; font-size: small; font-family:courier; width:100%; margin:3em; border: dotted 2px silver;padding:3em;">
+select  sector, industry, round(avg(pe_ttm)),round(avg(pe_f1)), round(avg(pe_f2)) from stocks  group by sector, industry having industry='Communication - Network Software' LIMIT 10;
+
+elect  sector, industry, ticker, name ,pe_ttm, pe_f1, pe_f2 from stocks  where industry='Communication - Network Software' LIMIT 10;
+</pre>
+
+
+<span style="background:#DCDFD5;padding:2em;">#DCDFD5</span>
+<span style="background:#C9CEBD;padding:2em;">#C9CEBD</span>
+<span style="background:#B2BCAA;padding:2em;">#B2BCAA</span>
+<span style="background:#838E83;padding:2em;">#838E83</span>
+<span style="background:#6C6061;padding:2em;">#6C6061</span>
+<span style="background:#64403E;padding:2em;">#64403E</span>
+<span style="background:#A53F2B;padding:2em;">#A53F2B</span>
+<span style="background:#FCDFA6;padding:2em;">#FCDFA6 - yellow</span>
+
+
+
+
+	<h1> h1 Title </h1>
+
+<div id="space">Margin -  border -  padding </div>
+
+
+<span id="id">Market Cap... testing Small Caps </span>
+
+<br/>
+<span>padding top, right, bottom, left </span>
+
+
+<div class="class">
+
+	Block Elelemnts have a break after
+		(large) div, body ,table , 
+
+	inline elements do not 
+		links, option, span
+
+</div>
+
+
+
+<div>
+	<h3>trade.com</h3>
+frontline-investments
+2 may 2017    
+Andrew Boddy
+
+male, +46
+</div>
+
+
+
+<div> 
+ + next
+ > inside  
+ p[class]    tagets every p with a class
+ *[alt~="nintendo"] targets alt values of the string
+</div>
+Email: <input type="text">
+<ul>
+<li><button type="button">Access Data</button> <br/>
+<li><button type="button">Forget</button><br/>
+<li><button type="button">Contest Processing</button><br/>
+<li><button type="button">Correct Data</button>
+</ul>
+
+insert into industries (select average(pe1),average(pe1) from stocks group by sector, industry);
+
+
+
+
+	<table class="negative" style="width:50%">
+		<tr>
+			<td>LUBAR/UA1</td>
+			<td data-number="-98669"> -98669</td>
+			<td data-number="23801"> 23801</td>
+			<td data-number="22909"> 22909</td>
+			<td data-number="18,603.92"> 18,603.92</td>
+		</tr>
+	</table>
+
+<div>
+php artisan make:migration create_users_table --create=users
+
+php artisan make:migration add_votes_to_users_table --table=users
+
+</div>
+
+
+<div  class="dot">
+
+<ul>
+<li>https://api.intrinio.com/data_point?ticker=GOOS,DAN,NVDA,MU,DB&item=last_price
+
+<li>https://api.intrinio.com/data_point?ticker=GOOS,DAN,NVDA,MU,DB&item=long_description
+
+<li>https://api.intrinio.com/data_point?identifier=AAPL&item=qtr_1_eps_est_mean,qtr_2_eps_est_mean,qtr_3_eps_est_mean,qtr_4_eps_est_mean,qtr_5_eps_est_mean,qtr_6_eps_est_mean,qtr_7_eps_est_mean,qtr_8_eps_est_mean
+<li>https://api.intrinio.com/data_point?identifier=AAPL&item=qtr_5_eps_est_mean
+
+<li>https://api.intrinio.com/data_point?identifier=AAPL&item=qtr_1_eps_est_mean,qtr_2_eps_est_mean,qtr_3_eps_est_mean,qtr_4_eps_est_mean,qtr_5_eps_est_mean
+
+
+
+<li>3.75 / 2.86 / 2.17 / 2.37 / 3.82 / 2.97 / 2.22 / 2.52
+</ul>
+
+<span>
+Alpha Vantage
+	- price histroy only
+	- DKTB57G4CNYY13A8
+
+</span>
+
+
+
+
+
+insert into stocks (select null, now(), now(), Ticker, Company_Name, Sector, Industry, Market_Cap, Exchange, F0_Consensus_Est, F1_Consensus_Est, F2_Consensus_Est, P_E_Trailing_12_Months, P_E_F1, P_E_F2, PEG_Ratio, Div_Yield, Net_Margin, Change_F1_Est_4_weeks, Change_F2_Est_4_weeks, Change_LT_Growth_Est_4_weeks, Last_EPS_Surprise, Previous_EPS_Surprise, Avg_EPS_Surprise_Last_4_Qtrs, Next_EPS_Report_Date, Month_of_Fiscal_Yr_End, Debt_Total_Capital, 0,0 from stock) ;
+
+
+
+
+
+
+        {!! Form::open(['action' => ['WatchItemsController@update', '123'], 'method'=>'PUT']) !!}
+                {{Form::submit('reset', ['class'=>'btn btn-info'])}}
+        {!! Form::close() !!}
+
+
+
+insert into watch_items values (null, now(), now(), 'Darvas', 'MU', '2016-02-18', '10.00', '11.00', 'check DB');
+
+
+
+
+</div>
+
+</body>
+</html>

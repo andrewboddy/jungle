@@ -1,0 +1,222 @@
+
+
+
+.container {
+    margin: 0px;
+}
+
+td[data-number^="-"] {
+    color:#cd5c5c;
+}
+
+tr[data-long_x_short^="-"] {
+    background: #E0AC9D;
+}
+tr[data-long_x_short^="0"] {
+    background: #A0ACAD;
+}
+
+table.data {
+    color:black;
+}
+
+.header {
+    background: #838E83;
+}
+
+.eps {
+    color:black;
+    background: #C9CEBD;
+    opacity: 0.5;
+}
+
+.pe {
+    color:black;
+    background: #DCDFD5;
+    opacity: 0.5;
+}
+
+
+.eps_actual {
+    color: black;
+    font-size: larger;
+}
+
+.watching {
+    background: #D2D6C9;
+}
+
+
+.vertical { writing-mode: tb-rl; vertical-align: text-bottom; }
+
+.heat-5 {background: #880000; height:30px; width:50px;}
+.heat-4 {background: #aa0000; height:30px; width:30px;}
+.heat-3 {background: #cc0000; height:30px; width:30px;}
+.heat-2 {background: #ff0000; height:30px; width:30px;}
+.heat-1 {background: #ff6600; height:30px; width:30px;}
+.heat1 {background: #ff9933; height:30px; width:30px;}
+.heat2 {background: #ffcccc; height:30px; width:30px;}
+.heat3 {background: #ffffff; height:30px; width:30px;}
+.heat4 {background: #ffff99; height:30px; width:30px;}
+.heat5 {background: #ffff00; height:30px; width:30px;}
+.heat6 {background: #ccff99; height:30px; width:50px;}
+.heat7 {background: #ccff33; height:30px; width:30px;}
+.heat8 {background: #99ff33; height:30px; width:30px;}
+.heat9 {background: #66ff66; height:30px; width:30px;}
+.heat10 {background: #00ff00; height:30px; width:30px;}
+.heat11 {background: #00cc66; height:30px; width:30px;}
+.heat12 {background: #339933; height:30px; width:30px;}
+.heat13 {background: #009900; height:30px; width:30px;}
+.heat14 {background: #336633; height:30px; width:30px;}
+.heat15 {background: #333333; height:30px; width:30px;}
+.heat16 {background: #333333; height:30px; width:30px;}
+.heat17 {background: #333333; height:30px; width:30px;}
+.heat18 {background: #333333; height:30px; width:30px;}
+
+}
+
+
+.sparklist {
+    overflow: visible;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.sparkline {
+    display: inline-block;
+    height: 7em;
+    margin: 0 0.5em;
+    transition: all .5s ease;
+}
+
+.sparkline .index {
+    position: relative;
+    float: left;
+    margin:0px;
+    width: 16px;
+    height: 7em;
+}
+
+.sparkline .index .count {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    margin:0px 1px;
+    background: #cccccc;
+    font: 0/0 a;
+    text-shadow: none;
+    color: transparent;
+}
+
+
+
+
+.checkbox-slider {
+    display: flex;
+    align-items: center;
+}
+
+
+    .slider {
+        position: relative;
+        margin-right: 10px;
+        width: 50px;
+        height: 30px;
+        background: #ddd;
+        transition: 0.4s;
+        border-radius: 15px;
+        cursor: pointer;
+    }
+
+    .slider::before {
+        position:absolute;
+        contnet : "";
+        width:20px;
+        height:20px;
+        left: 5px;
+        top:5px;
+        background:limegreen;
+        transition: 0.4s;
+        border-radius: 50%;
+        box-shadow:0 0 1px rgba(0,0,0,0.15);
+    }
+    input {
+        display: none;
+    }
+    input:checked + .slider {
+        background: indianred;
+    }
+    input:checked + .slider:before {
+        transform: translateX(20px);
+    }
+
+
+.vertical-text {
+    transform: rotate(300deg);
+    transform-origin: left top 0;
+}
+
+.heatmap16 {
+    background-color: #2ab27b;
+}
+.heatmap15 {
+    background-color: #63be7b;
+}
+.heatmap14 {
+    background-color: #76c47d;
+}
+.heatmap13 {
+    background-color: #88c97e;
+}
+.heatmap12 {
+    background-color: #9bce7f;
+}
+.heatmap11 {
+    background-color: #add480;
+}
+.heatmap10 {
+    background-color: #bfd981;
+}
+.heatmap9 {
+    background-color: #d2de82;
+}
+.heatmap8 {
+    background-color: #e4e483;
+}
+.heatmap7 {
+    background-color: #f6e984;
+}
+.heatmap6 {
+    background-color: #fee382;
+}
+.heatmap5 {
+    background-color: #fdd47f;
+}
+.heatmap4 {
+    background-color: #fcc47c;
+}
+.heatmap3 {
+    background-color: #fcb579;
+}
+.heatmap2 {
+    background-color: #fba676;
+}
+.heatmap1 {
+    background-color: #fa9673;
+}
+.heatmap0 {
+    background-color: #f98770;
+}
+.heatmap-1 {
+    background-color: #f8786d;
+}
+.heatmap-2 {
+    background-color: #f8696b;
+}
+.heatmap-3 {
+    background-color: #ff0000;
+}
