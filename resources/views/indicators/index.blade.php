@@ -2,7 +2,6 @@
 
 @section('content')
 
-
         <h1>Macro Indicators</h1>
 
         <div class="progress">
@@ -13,6 +12,30 @@
         <table>
             <tr>
                 <th class="h2">ISM PMI Manufacturing</th>
+                @foreach ($periods as $period)
+                    <th class="vertical-text">{{$period->name}}</th>
+                @endforeach
+            </tr>
+            <tr class="h4 strong">
+                <td> - </td>
+                @foreach ($periods as $period)
+                    <td>{{$period->index}}</td>
+                @endforeach
+            </tr>
+            @foreach ($indicators as $report => $monthlyRanks)
+                <tr>
+                    <td width="330px">{{$report}}</td>
+                    @foreach ($monthlyRanks as $rank)
+                        <td class="heatmap{{$rank}}">{{$rank}}</td>
+                    @endforeach
+                </tr>
+            @endforeach
+        </table>
+        
+        <br/><br/><br/><br/><br/>
+        <table>
+            <tr>
+                <th class="h2">ISM PMI Manufacturing design</th>
                 <th class="vertical-text">2017-04</th>
                 <th class="vertical-text">2017-05</th>
                 <th class="vertical-text">2017-06</th>

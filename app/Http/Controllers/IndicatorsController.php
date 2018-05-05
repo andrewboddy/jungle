@@ -7,6 +7,10 @@ use DB;
 use App\Indicator;
 use \stdClass;
 
+use App\PMI\Period;
+
+require_once('C:/Users/Robert/Documents/Ohjelmointi/andrew_boddy/pmi.php');
+
 class IndicatorsController extends Controller
 {
     /**
@@ -16,16 +20,6 @@ class IndicatorsController extends Controller
      */
     public function index()
     {
-        $month = array();
-        $month[0] = date('Ym', time());
-        $month[-1] = date('Ym',strtotime("-1 month"));
-        $month[-2] = date('Ym',strtotime("-2 month"));
-        $month[-3] = date('Ym',strtotime("-3 month"));
-        $month[-4] = date('Ym',strtotime("-4 month"));
-        $month[-5] = date('Ym',strtotime("-5 month"));
-
-        $rows = [];
-//        $rows[] = (object) array('a'=>'Y-m', 'b'=>$month_5, 'c'=>$month_4, 'd'=>$month_3, 'e'=>$month_2, 'f'=>$month_1, 'g'=>$month_0, 'h'=>'');
 
         /*
          *
@@ -52,32 +46,32 @@ class IndicatorsController extends Controller
 | 18 | 2018-01 | PMI Manufacturing | Textile Mills                                     | -2    |       |
 | 19 | 2018-01 | PMI Manufacturing | INDEX                                             | 59.7  |       |
 +----+---------+-------------------+---------------------------------------------------+-------+-------+*/
-        $indicators = Indicator::all();
-        $array = array();
-        foreach ($indicators as $indicator) {
-            $month = 'm'.$indicator->period;
-            if ($month == 'm201708')  {
-                $array[$indicator->key][$month] = $indicator->key;
+        
+        $periods = Period::orderBy('name', 'asc')->take(6)->get();
+        
+        $industryRankByPeriod = [];
+        
+        foreach($periods as $period) {
+            
+            foreach($period->ranks as $rank) {
+                
+                $industryName = $rank->industry->name;
+                
+                if(!isset($industryRankByPeriod[$industryName])) {
+                    $industryRankByPeriod[$industryName] = [];
+                }
+                
+                $industryRankByPeriod[$industryName][] = $rank->rank;
             }
-            $array[$indicator->key][$month] = $indicator->value;
         }
-
-        print_r( $array);
-      //  ["Machinery"]=> array(2) { [0]=> array(1) { ["m201801"]=> string(2) "16" } [1]=> array(1) { ["m201802"]=> int(17) } }
-        return view('indicators.index')->with('indicators', $array);
+        
+        ksort($industryRankByPeriod);
+        
+        return view('indicators.index', [
+            'indicators' => $industryRankByPeriod,
+            'periods' => $periods
+        ]);
     }
-
-/*
-
-        //var_dump( $rows);
-//        print_r($rows);
-//      $rows[] = (object) array('key'=>'INDEX', 'm201708'=>'54.3', 'm201709'=>'55.1', 'm201710'=>'61.1', 'm201711'=>'60.2', 'm201712'=>'57.9' ,'m201801'=>'59.1', 'h'=>'');
-        $rows[] = (object) array('key'=>'INDEX', '2017-08'=>'54.3', '2017-09'=>'55.1', '2017-10'=>'61.1', '2017-11'=>'60.2', '2017-12'=>'57.9' ,'2018-01'=>'59.1', 'h'=>'');
-        $rows[] = (object) array('a'=>'Manufacturing', 'b'=>'14', 'c'=>'8', 'd'=>'10', 'e'=>'12', 'f'=>'15' ,'g'=>'16','h'=>'Storms');
-        $rows[] = (object) array('a'=>'Primary Metals', 'b'=>'14', 'c'=>'8', 'd'=>'13', 'e'=>'12', 'f'=>'15' ,'g'=>'15', 'h'=>'Low inventory');
-*/
-        //return view('indicators.index')->with('indicators', $rows);
-
 
     /**
      * Show the form for creating a new resource.
