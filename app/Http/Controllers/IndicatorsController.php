@@ -47,9 +47,20 @@ class IndicatorsController extends Controller
 | 19 | 2018-01 | PMI Manufacturing | INDEX                                             | 59.7  |       |
 +----+---------+-------------------+---------------------------------------------------+-------+-------+*/
         
-        $periods = Period::orderBy('name', 'asc')->take(6)->get();
+        $manufacturingPeriods = Period::where("is_manufacturing", true)->orderBy("name", "asc")->take(6)->get();
+        $nonManufacturingPeriods = Period::where("is_manufacturing", false)->orderBy("name", "asc")->take(6)->get();
         
-        $industryRankByPeriod = [];
+        return view('indicators.index', [
+            "manufacturingIndicators" => $this->getIndustryRanksByPeriods($manufacturingPeriods),
+            "manufacturingPeriods" => $manufacturingPeriods,
+            "nonManufacturingIndicators" => $this->getIndustryRanksByPeriods($nonManufacturingPeriods),
+            "nonManufacturingPeriods" => $nonManufacturingPeriods
+        ]);
+    }
+    
+    private function getIndustryRanksByPeriods($periods) {
+        
+        $industryRanksByPeriod = [];
         
         foreach($periods as $period) {
             
@@ -57,20 +68,17 @@ class IndicatorsController extends Controller
                 
                 $industryName = $rank->industry->name;
                 
-                if(!isset($industryRankByPeriod[$industryName])) {
-                    $industryRankByPeriod[$industryName] = [];
+                if(!isset($industryRanksByPeriod[$industryName])) {
+                    $industryRanksByPeriod[$industryName] = [];
                 }
                 
-                $industryRankByPeriod[$industryName][] = $rank->rank;
+                $industryRanksByPeriod[$industryName][] = $rank->rank;
             }
         }
         
-        ksort($industryRankByPeriod);
+        ksort($industryRanksByPeriod);
         
-        return view('indicators.index', [
-            'indicators' => $industryRankByPeriod,
-            'periods' => $periods
-        ]);
+        return $industryRanksByPeriod;
     }
 
     /**
