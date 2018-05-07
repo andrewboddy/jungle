@@ -2,187 +2,83 @@
 
 @section('content')
 
-        <h1>Macro Indicators</h1>
+    <h1>Macro Indicators</h1>
 
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
 
-        <br/><br/><br/><br/><br/>
-        <table>
-            <tr>
-                <th class="h2">ISM PMI Manufacturing</th>
-                @foreach ($manufacturingPeriods as $period)
-                    <th class="vertical-text">{{$period->name}}</th>
-                @endforeach
-            </tr>
-            <tr class="h4 strong">
-                <td> - </td>
-                @foreach ($manufacturingPeriods as $period)
-                    <td>{{$period->index}}</td>
-                @endforeach
-            </tr>
-            @foreach ($manufacturingIndicators as $report => $monthlyRanks)
-                <tr>
-                    <td width="330px">{{$report}}</td>
-                    @foreach ($monthlyRanks as $rank)
-                        <td class="heatmap{{$rank}}">{{$rank}}</td>
-                    @endforeach
-                </tr>
+    @foreach ($indicators as $indicator)
+    <br/><br/><br/><br/>
+    <table class="heatmap-table">
+        <tr>
+            <th class="h2">{{$indicator['name']}}</th>
+            @foreach ($indicator['periods'] as $period)
+                <th class="vertical-text">{{$period->name}}</th>
             @endforeach
-        </table>
-        
-        <br/><br/><br/><br/><br/>
-        <table>
-            <tr>
-                <th class="h2">ISM PMI Services</th>
-                @foreach ($nonManufacturingPeriods as $period)
-                    <th class="vertical-text">{{$period->name}}</th>
-                @endforeach
-            </tr>
-            <tr class="h4 strong">
-                <td> - </td>
-                @foreach ($nonManufacturingPeriods as $period)
-                    <td>{{$period->index}}</td>
-                @endforeach
-            </tr>
-            @foreach ($nonManufacturingIndicators as $report => $monthlyRanks)
-                <tr>
-                    <td width="330px">{{$report}}</td>
-                    @foreach ($monthlyRanks as $rank)
-                        <td class="heatmap{{$rank}}">{{$rank}}</td>
-                    @endforeach
-                </tr>
+            <th></th>
+        </tr>
+        <tr class="h4 strong">
+            <td> - </td>
+            @foreach ($indicator['periods'] as $period)
+                <td>{{$period->index}}</td>
             @endforeach
-        </table>
-        
-        <br/><br/><br/><br/><br/>
-        <table>
+        </tr>
+        @foreach ($indicator['industryIndicators'] as $report => $ranksAndComments)
             <tr>
-                <th class="h2">ISM PMI Manufacturing design</th>
-                <th class="vertical-text">2017-04</th>
-                <th class="vertical-text">2017-05</th>
-                <th class="vertical-text">2017-06</th>
-                <th class="vertical-text">2017-07</th>
-                <th class="vertical-text">2017-08</th>
-                <th class="vertical-text">2017-09</th>
-                <th class="vertical-text">2017-10</th>
-                <th class="vertical-text">2017-11</th>
-                <th class="vertical-text">2017-12</th>
-                <th class="vertical-text">2018-01</th>
-                <th class="vertical-text">2018-02</th>
-                <th class="vertical-text">2018-03</th>
-            </tr>
-            <tr class="h4 strong">
-                <td> - </td>
-                <td>52.2</td>
-                <td>52.2</td>
-                <td>52.2</td>
-                <td>52.2</td>
-                <td>52.2</td>
-                <td>52.2</td>
-                <td>52.2</td>
-                <td>52.2</td>
-                <td>57.2</td>
-                <td>58.2</td>
-                <td>52.1</td>
-                <td>56.9</td>
-            </tr>
-            <tr>
-                <td width="330px">Fabricated Metal Products</td>
-                <td class="heatmap11">11</td>
-                <td class="heatmap2">2</td>
-                <td class="heatmap4">4</td>
-                <td class="heatmap12">12</td>
-                <td class="heatmap11">11</td>
-                <td class="heatmap10">10</td>
-                <td class="heatmap7">7</td>
-                <td class="heatmap8">8</td>
-                <td class="heatmap9">9</td>
-                <td class="heatmap6">6</td>
-                <td class="heatmap15">15</td>
-                <td class="heatmap16">16</td>
-            </tr>
-            <tr>
-                <td>Machinery</td>
-                <td class="heatmap7">7</td>
-                <td class="heatmap8">8</td>
-                <td class="heatmap9">9</td>
-                <td class="heatmap6">6</td>
-                <td class="heatmap11">11</td>
-                <td class="heatmap2">2</td>
-                <td class="heatmap4">4</td>
-                <td class="heatmap12">12</td>
-                <td class="heatmap11">11</td>
-                <td class="heatmap10">10</td>
-                <td class="heatmap15">15</td>
-                <td class="heatmap16">16</td>
-            </tr>
-            <tr>
-                <td>Transportation Equipment</td>
-                <td class="heatmap4">4</td>
-                <td class="heatmap12">12</td>
-                <td class="heatmap11">11</td>
-                <td class="heatmap10">10</td>
-                <td class="heatmap11">11</td>
-                <td class="heatmap2">2</td>
-                <td class="heatmap7">7</td>
-                <td class="heatmap8">8</td>
-                <td class="heatmap6">6</td>
-                <td class="heatmap15">15</td>
-                <td class="heatmap16">16</td>
-                <td class="heatmap9">9</td>
-            </tr>
-            <tr>
-                <td>.</td>
-                <td colspan="12" class="alert-info">
-                    2018-01: Lower inventories suggest higher than expected demand <br/>
-                    2018-02: Storm damage has affected down stream demand; expected upturn towards end of quarter <br/>
-                    2018-03: Labour skills shortage affecting delivery times
+                <td width="330px">{{$report}}</td>
+                @foreach ($ranksAndComments["ranks"] as $rank)
+                    <td class="heatmap{{$rank}}">{{$rank}}</td>
+                @endforeach
+                <td>
+                    @if (count($ranksAndComments["comments"]) > 1)
+                        <div class="display-comments-button">[Comments]</div>
+                        <div class="industry-comments-modal">
+                            <div class="industry-comments-modal-content">
+                                <span class="close">&times;</span>
+                                <h3>Comments</h3>
+                                <h5>{{$indicator['name']}} / {{$report}}</h5>
+                                @foreach (array_reverse($ranksAndComments["comments"]) as $comment)
+                                    <p>{{$comment}}</p>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
                 </td>
             </tr>
-            <tr>
-                <td>Paper Products</td>
-                <td class="heatmap9">9</td>
-                <td class="heatmap6">6</td>
-                <td class="heatmap11">11</td>
-                <td class="heatmap2">2</td>
-                <td class="heatmap4">4</td>
-                <td class="heatmap12">12</td>
-                <td class="heatmap15">15</td>
-                <td class="heatmap16">16</td>
-                <td class="heatmap11">11</td>
-                <td class="heatmap10">10</td>
-                <td class="heatmap7">7</td>
-                <td class="heatmap8">8</td>
-            </tr>
-            <tr>
-                <td> ... </td>
-            </tr>
-        </table>
+        @endforeach
+    </table>
+    @endforeach
+    
+    <br/>
 
-        <br/><br/><br/><br/><br/>
-        <table>
-            <tr>
-                <th class="h2">ISM PMI Services</th>
-                <th class="vertical-text">2017-04</th>
-                <th class="vertical-text">2017-05</th>
-                <th class="vertical-text">2017-06</th>
-                <th class="vertical-text">2017-07</th>
-                <th class="vertical-text">2017-08</th>
-                <th class="vertical-text">2017-09</th>
-                <th class="vertical-text">2017-10</th>
-                <th class="vertical-text">2017-11</th>
-                <th class="vertical-text">2017-12</th>
-                <th class="vertical-text">2018-01</th>
-                <th class="vertical-text">2018-02</th>
-                <th class="vertical-text">2018-03</th>
-            </tr>
-            <tr>
-                <td>Same table as above but for services   ...</td>
-            </tr>
-        </table>
-
+    <script type="text/javascript">
+        
+        var initializeCloseModalButton = function(modal) {
+            var closeButton = modal.querySelector('.close');
+            closeButton.addEventListener('click', function (event) {
+                modal.style.display = 'none';
+                var body = document.querySelector('body');
+                body.style.height = 'auto';
+                body.style.overflow = 'auto';
+            });
+        };
+        
+        window.addEventListener('load', function() {
+            var displayCommentsButtons = document.querySelectorAll('.display-comments-button');
+            for(var i = 0; i < displayCommentsButtons.length; ++i) {
+                displayCommentsButtons[i].addEventListener('click', function (event) {
+                    event.preventDefault();
+                    var modal = this.parentNode.querySelector('.industry-comments-modal');
+                    modal.style.display = 'block';
+                    var body = document.querySelector('body');
+                    body.style.height = '100%';
+                    body.style.overflow = 'hidden';
+                    initializeCloseModalButton(modal);
+                });
+            }
+        });
+    </script>
 
 @endsection
 

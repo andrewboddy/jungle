@@ -73,9 +73,6 @@ table.data {
 .heat17 {background: #333333; height:30px; width:30px;}
 .heat18 {background: #333333; height:30px; width:30px;}
 
-}
-
-
 .sparklist {
     overflow: visible;
     width: 100%;
@@ -160,6 +157,10 @@ table.data {
     transform-origin: left top 0;
 }
 
+.heatmap-table td {
+    padding: 0 5px;
+}
+
 .heatmap16 {
     background-color: #2ab27b;
 }
@@ -219,4 +220,45 @@ table.data {
 }
 .heatmap-3 {
     background-color: #ff0000;
+}
+
+.display-comments-button {
+    cursor: pointer;
+}
+
+.industry-comments-modal {
+    background-color: rgba(128, 128, 128, 0.25);
+    display: none;
+    height: 100vh;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    z-index: 1000;
+}
+
+.industry-comments-modal h3 {
+    margin-bottom: 0;
+}
+
+.industry-comments-modal h5 {
+    color: #969ea2;
+    margin-top: 0;
+}
+
+.industry-comments-modal .close {
+    font-size: 2.5em;
+}
+
+.industry-comments-modal .industry-comments-modal-content {
+    background-color: #f5f8fa;
+    height: 90%;
+    left:50%;
+    max-width: 90%;
+    overflow-y: auto;
+    padding: 10px;
+    position: fixed;
+    top:50%;
+    transform: translate(-50%,-50%);
+    width: 450px;
 }

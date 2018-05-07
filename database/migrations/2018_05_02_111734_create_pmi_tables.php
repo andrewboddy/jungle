@@ -40,7 +40,7 @@ class CreatePmiTables extends Migration
             $table->increments('id');
             $table->unsignedInteger('pmi_industry_id');
             $table->unsignedInteger('pmi_period_id');
-            $table->string('comment');
+            $table->text('comment');
             $table->foreign('pmi_industry_id')->references('id')->on('pmi_industries');
             $table->foreign('pmi_period_id')->references('id')->on('pmi_periods');
         });

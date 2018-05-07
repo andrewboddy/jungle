@@ -58,6 +58,11 @@ class ParsePMIDataToDatabase extends Command
                     "index" => [
                         "start" => "PMI<sup>&#174;</sup> at ",
                         "end" => "%"
+                    ],
+                    "comments" => [
+                        "start" => "<!-- Respondent List Items -->",
+                        "end" => "<h3 class=\"text-center text-strong text-uppercase\">Manufacturing at a Glance",
+                        "liStart" => "<li class=\"list-group-item\">"
                     ]
                 ]
             ],
@@ -79,6 +84,11 @@ class ParsePMIDataToDatabase extends Command
                     "index" => [
                         "start" => "NMI<sup>&#174;</sup> at ",
                         "end" => "%"
+                    ],
+                    "comments" => [
+                        "start" => "WHAT RESPONDENTS ARE SAYING",
+                        "end" => "NON-MANUFACTURING SURVEY RESULTS AT A GLANCE",
+                        "liStart" => "<li>"
                     ]
                 ]
             ]

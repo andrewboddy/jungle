@@ -18,4 +18,9 @@ class Industry extends Model
     {
         return $this->hasMany('App\PMI\Rank', 'pmi_industry_id');
     }
+    
+    public function comments()
+    {
+        return $this->hasMany('App\PMI\Comment', 'pmi_industry_id');
+    }
 }

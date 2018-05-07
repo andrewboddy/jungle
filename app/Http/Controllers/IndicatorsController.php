@@ -8,6 +8,7 @@ use App\Indicator;
 use \stdClass;
 
 use App\PMI\Period;
+use App\Classes\PMI\IndustryIndicatorsFetcher;
 
 require_once('C:/Users/Robert/Documents/Ohjelmointi/andrew_boddy/pmi.php');
 
@@ -50,35 +51,22 @@ class IndicatorsController extends Controller
         $manufacturingPeriods = Period::where("is_manufacturing", true)->orderBy("name", "asc")->take(6)->get();
         $nonManufacturingPeriods = Period::where("is_manufacturing", false)->orderBy("name", "asc")->take(6)->get();
         
+        $industryIndicatorsFetcher = new IndustryIndicatorsFetcher();
+        
         return view('indicators.index', [
-            "manufacturingIndicators" => $this->getIndustryRanksByPeriods($manufacturingPeriods),
-            "manufacturingPeriods" => $manufacturingPeriods,
-            "nonManufacturingIndicators" => $this->getIndustryRanksByPeriods($nonManufacturingPeriods),
-            "nonManufacturingPeriods" => $nonManufacturingPeriods
+            "indicators" => [
+                [
+                    "name" => "ISM PMI Manufacturing",
+                    "industryIndicators" => $industryIndicatorsFetcher->getIndicatorsByPeriods($manufacturingPeriods),
+                    "periods" => $manufacturingPeriods
+                ],
+                [
+                    "name" => "ISM PMI Services",
+                    "industryIndicators" => $industryIndicatorsFetcher->getIndicatorsByPeriods($nonManufacturingPeriods),
+                    "periods" => $nonManufacturingPeriods
+                ]
+            ]
         ]);
-    }
-    
-    private function getIndustryRanksByPeriods($periods) {
-        
-        $industryRanksByPeriod = [];
-        
-        foreach($periods as $period) {
-            
-            foreach($period->ranks as $rank) {
-                
-                $industryName = $rank->industry->name;
-                
-                if(!isset($industryRanksByPeriod[$industryName])) {
-                    $industryRanksByPeriod[$industryName] = [];
-                }
-                
-                $industryRanksByPeriod[$industryName][] = $rank->rank;
-            }
-        }
-        
-        ksort($industryRanksByPeriod);
-        
-        return $industryRanksByPeriod;
     }
 
     /**

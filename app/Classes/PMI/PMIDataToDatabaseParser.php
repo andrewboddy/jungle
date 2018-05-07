@@ -6,9 +6,11 @@ use Illuminate\Support\Facades\DB;
 
 use App\PMI\Period;
 use App\PMI\Rank;
+use App\PMI\Comment;
 
 use App\Classes\SubtextFetcher;
 use App\Classes\PMI\RanksArrayGenerator;
+use App\Classes\PMI\CommentsParser;
 
 class PMIDataToDatabaseParser {
     
@@ -23,6 +25,13 @@ class PMIDataToDatabaseParser {
         $industriesListText = $this->getIndustriesListText($dataSource);
         $periodName = $this->getPeriodName($dataSource);
         $index = $this->getIndex($dataSource);
+        
+        $commentsParser = new CommentsParser();
+        $commentsParser->initialize($dataSource, $this->subtextFetcher);
+        
+        if($commentsParser->invalidCommentsExists()) {
+            return $commentsParser->printInvalidCommentsError();
+        }
         
         $ranksArrayGenerator = new RanksArrayGenerator();
         $ranksArrayGenerator->initialize($industriesListText, $dataSource["isManufacturing"]);
@@ -42,6 +51,7 @@ class PMIDataToDatabaseParser {
         
         $period = $this->createPeriod($periodName, $index, $dataSource["isManufacturing"]);
         $this->createRankEntities($ranks, $period->id);
+        $this->createComments($commentsParser->getComments(), $period->id);
     }
     
     private function getIndustriesListText($dataSource) {
@@ -81,6 +91,16 @@ class PMIDataToDatabaseParser {
             $rankEntity->pmi_industry_id = $rank["industryId"];
             $rankEntity->pmi_period_id = $periodId;
             $rankEntity->save();
+        }
+    }
+    
+    private function createComments($comments, $periodId) {
+        foreach($comments as $comment) {
+            $commentEntity = new Comment;
+            $commentEntity->pmi_industry_id = $comment["industryId"];
+            $commentEntity->pmi_period_id = $periodId;
+            $commentEntity->comment = $comment["comment"];
+            $commentEntity->save();
         }
     }
     
