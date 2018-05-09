@@ -80,6 +80,13 @@
                         text: 'Index'
                     }
                 },
+                plotOptions: {
+                  line: {
+                    marker: {
+                      enabled: false
+                    }
+                  }
+                },
                 series: [{
                     name: 'Index',
                     data: Object.values(data),
