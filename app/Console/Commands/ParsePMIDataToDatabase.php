@@ -39,6 +39,8 @@ class ParsePMIDataToDatabase extends Command
      */
     public function handle()
     {
+        echo "Starting PMI data scraping...";
+
         $dataSources = [
             [
                 "url" => "https://www.instituteforsupplymanagement.org/ISMReport/MfgROB.cfm", // Newest
@@ -99,5 +101,7 @@ class ParsePMIDataToDatabase extends Command
         foreach($dataSources as $dataSource) {
             $PMIDataToDatabaseParser->parseRanksToDatabase($dataSource);
         }
+
+        echo "PMI data scraping done!";
     }
 }
