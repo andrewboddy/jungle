@@ -7,7 +7,7 @@ use Illuminate\Console\Command;
 use App\Classes\PMI\PMIDataToDatabaseParser;
 
 class ParsePMIDataToDatabase extends Command
-{   
+{
     /**
      * The name and signature of the console command.
      *
@@ -21,7 +21,7 @@ class ParsePMIDataToDatabase extends Command
      * @var string
      */
     protected $description = 'Scrapes PMI data and saves it to database';
-    
+
     /**
      * Create a new command instance.
      *
@@ -93,11 +93,11 @@ class ParsePMIDataToDatabase extends Command
                 ]
             ]
         ];
-        
+
         $PMIDataToDatabaseParser = new PMIDataToDatabaseParser();
-        
+
         foreach($dataSources as $dataSource) {
             $PMIDataToDatabaseParser->parseRanksToDatabase($dataSource);
-        } 
+        }
     }
 }

@@ -9,6 +9,7 @@ use \stdClass;
 
 use App\PMI\Period;
 use App\Classes\PMI\IndustryIndicatorsFetcher;
+use App\Classes\PMI\IndexChartDataCreator;
 
 require_once('C:/Users/Robert/Documents/Ohjelmointi/andrew_boddy/pmi.php');
 
@@ -47,23 +48,33 @@ class IndicatorsController extends Controller
 | 18 | 2018-01 | PMI Manufacturing | Textile Mills                                     | -2    |       |
 | 19 | 2018-01 | PMI Manufacturing | INDEX                                             | 59.7  |       |
 +----+---------+-------------------+---------------------------------------------------+-------+-------+*/
-        
-        $manufacturingPeriods = Period::where("is_manufacturing", true)->orderBy("name", "asc")->take(6)->get();
-        $nonManufacturingPeriods = Period::where("is_manufacturing", false)->orderBy("name", "asc")->take(6)->get();
-        
+
+        $manufacturingPeriods = Period::where([
+          "is_manufacturing" => true,
+          "historical" => false
+        ])->orderBy("name", "asc")->take(6)->get();
+
+        $nonManufacturingPeriods = Period::where([
+          "is_manufacturing" => false,
+          "historical" => false
+        ])->orderBy("name", "asc")->take(6)->get();
+
         $industryIndicatorsFetcher = new IndustryIndicatorsFetcher();
-        
+        $indexChartDataCreator = new IndexChartDataCreator();
+
         return view('indicators.index', [
             "indicators" => [
                 [
                     "name" => "ISM PMI Manufacturing",
                     "industryIndicators" => $industryIndicatorsFetcher->getIndicatorsByPeriods($manufacturingPeriods),
-                    "periods" => $manufacturingPeriods
+                    "periods" => $manufacturingPeriods,
+                    "indexChartData" => $indexChartDataCreator->getJSON(true)
                 ],
                 [
                     "name" => "ISM PMI Services",
                     "industryIndicators" => $industryIndicatorsFetcher->getIndicatorsByPeriods($nonManufacturingPeriods),
-                    "periods" => $nonManufacturingPeriods
+                    "periods" => $nonManufacturingPeriods,
+                    "indexChartData" => $indexChartDataCreator->getJSON(false)
                 ]
             ]
         ]);

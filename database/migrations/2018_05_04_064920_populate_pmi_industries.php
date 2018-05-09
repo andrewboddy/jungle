@@ -53,7 +53,7 @@ class PopulatePmiIndustries extends Migration
             [ "industry" => "Wholesale Trade",                               "isManufacturing" => false ],
             [ "industry" => "Wood Products",                                 "isManufacturing" => true  ]
         ];
-        
+
         foreach($pmiIndustries as $pmiIndustry) {
             $industry = new Industry;
             $industry->name = $pmiIndustry["industry"];

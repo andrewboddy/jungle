@@ -2,13 +2,15 @@
 
 @section('content')
 
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+
     <h1>Macro Indicators</h1>
 
     <div class="progress">
         <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
 
-    @foreach ($indicators as $indicator)
+    @foreach ($indicators as $key => $indicator)
     <br/><br/><br/><br/>
     <table class="heatmap-table">
         <tr>
@@ -48,12 +50,50 @@
             </tr>
         @endforeach
     </table>
+
+    <br/><br/>
+
+    <div id="index-chart-container-{{$key}}"></div>
+
+    <script type="text/javascript">
+
+        window.addEventListener("load",function(event) {
+
+            var data = JSON.parse('<?php echo $indicator["indexChartData"]; ?>');
+
+            var chart = new Highcharts.Chart({
+                chart: {
+                    defaultSeriesType: 'line',
+                    renderTo: 'index-chart-container-{{$key}}'
+                },
+                title: {
+                    text: '{{$indicator["name"]}} Index'
+                },
+                xAxis: {
+                    categories: Object.keys(data),
+                    title: {
+                        text: 'Period'
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: 'Index'
+                    }
+                },
+                series: [{
+                    name: 'Index',
+                    data: Object.values(data),
+                }]
+            });
+        });
+    </script>
+
     @endforeach
-    
+
     <br/>
 
     <script type="text/javascript">
-        
+
         var initializeCloseModalButton = function(modal) {
             var closeButton = modal.querySelector('.close');
             closeButton.addEventListener('click', function (event) {
@@ -63,7 +103,7 @@
                 body.style.overflow = 'auto';
             });
         };
-        
+
         window.addEventListener('load', function() {
             var displayCommentsButtons = document.querySelectorAll('.display-comments-button');
             for(var i = 0; i < displayCommentsButtons.length; ++i) {
@@ -81,4 +121,3 @@
     </script>
 
 @endsection
-
